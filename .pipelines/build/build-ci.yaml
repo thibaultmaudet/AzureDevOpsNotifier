@@ -1,0 +1,13 @@
+parameters:
+  configuration: 'Release'
+
+jobs:
+- job: Build${{ parameters.platform }}
+  displayName: Build ${{ parameters.platform }}
+  pool:
+    vmImage: 'ubuntu-latest'
+  timeoutInMinutes: 120
+  strategy:
+    maxParallel: 10
+  steps:
+  - template: build-steps.yaml

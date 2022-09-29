@@ -1,0 +1,13 @@
+parameters:
+  token: ''
+
+jobs:
+- job: CopyToGithub
+  displayName: Copy to GitHub
+  pool:
+    vmImage: windows-latest
+  steps:
+  - bash: |
+      git push --prune https://${{ parameters.token }}@github.com/thibaultmaudet/$(Build.Repository.Name).git \
+          +refs/remotes/origin/*:refs/heads/* +refs/tags/*:refs/tags/*
+    displayName: 'Copy to Github'
